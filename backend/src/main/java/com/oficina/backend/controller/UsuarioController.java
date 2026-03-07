@@ -9,6 +9,7 @@ import com.oficina.backend.dto.CreateUsuarioDTO;
 import com.oficina.backend.dto.UsuarioResponseDTO;
 import com.oficina.backend.service.UsuarioService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 
 @RestController
@@ -30,6 +31,7 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
+    @Operation(summary = "Criar um novo usuário")
     @PostMapping
     /**
      * Endpoint para criar um novo usuário.
