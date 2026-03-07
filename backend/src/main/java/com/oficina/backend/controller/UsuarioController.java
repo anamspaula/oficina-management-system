@@ -5,10 +5,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.oficina.backend.domain.entity.Usuario;
 import com.oficina.backend.dto.CreateUsuarioDTO;
 import com.oficina.backend.dto.UsuarioResponseDTO;
 import com.oficina.backend.service.UsuarioService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -36,7 +37,7 @@ public class UsuarioController {
      * @param createUsuarioDTO O DTO contendo as informações para criar um novo usuário.
      * @return Um DTO de resposta contendo as informações do usuário criado.
      */
-    public UsuarioResponseDTO criarUsuario(@RequestBody CreateUsuarioDTO createUsuarioDTO) {
+    public UsuarioResponseDTO criarUsuario(@RequestBody @Valid CreateUsuarioDTO createUsuarioDTO) {
         return usuarioService.criarUsuario(createUsuarioDTO);
     }
 
