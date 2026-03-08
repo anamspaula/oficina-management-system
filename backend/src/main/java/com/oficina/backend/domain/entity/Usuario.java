@@ -2,6 +2,7 @@ package com.oficina.backend.domain.entity;
 
 import com.oficina.backend.domain.enums.PerfilUsuario;
 import jakarta.persistence.*;
+import java.util.List;
 
 import java.time.LocalDateTime;
 
@@ -30,6 +31,9 @@ public class Usuario {
 
     @Column(nullable = false)
     private LocalDateTime dataCriacao;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Veiculo> veiculos;
 
     public void setDataCriacao(LocalDateTime now) {
         this.dataCriacao = now;
