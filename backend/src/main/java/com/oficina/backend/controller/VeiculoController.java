@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.oficina.backend.domain.entity.Veiculo;
 import com.oficina.backend.dto.CreateVeiculoDTO;
+import com.oficina.backend.dto.UpdateVeiculoDTO;
 import com.oficina.backend.service.VeiculoService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -72,6 +73,20 @@ public class VeiculoController {
      */
     public void deleteVeiculo(@PathVariable Long id) {
         veiculoService.deleteVeiculo(id);
+    }
+
+
+    /**
+     * Endpoint para atualizar um veículo por ID. Recebe um DTO de atualização de veículo, 
+     * chama o serviço para atualizar o veículo e retorna o veículo atualizado.
+     * @param id
+     * @param dto
+     * @return
+     */
+    @PutMapping("/{id}")
+    @Operation(summary = "Atualizar um veículo por ID")
+    public Veiculo updateVeiculo(@PathVariable Long id, @RequestBody @Valid UpdateVeiculoDTO dto) {
+        return veiculoService.updateVeiculo(id, dto);
     }
 
 }
