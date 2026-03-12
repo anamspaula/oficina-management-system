@@ -9,6 +9,7 @@ import com.oficina.backend.domain.entity.Veiculo;
 import com.oficina.backend.domain.repository.UsuarioRepository;
 import com.oficina.backend.domain.repository.VeiculoRepository;
 import com.oficina.backend.dto.CreateVeiculoDTO;
+import com.oficina.backend.dto.UpdateVeiculoDTO;
 
 @Service
 /**
@@ -79,7 +80,28 @@ public class VeiculoService {
      */
     @SuppressWarnings("null")
     public void deleteVeiculo(Long id) {
+
         veiculoRepository.deleteById(id);
+    }
+
+    /**
+     * Método para atualizar um veículo por ID. Verifica se o veículo existe e, em caso afirmativo,
+     * @param id
+     * @param dto
+     * @return
+     */
+    @SuppressWarnings("null")
+    public Veiculo updateVeiculo(Long id, UpdateVeiculoDTO dto) {
+
+        Veiculo veiculo = veiculoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Veículo não encontrado"));
+
+        veiculo.setMarca(dto.getMarca());
+        veiculo.setModelo(dto.getModelo());
+        veiculo.setPlaca(dto.getPlaca());
+        veiculo.setAno(dto.getAno());
+
+        return veiculoRepository.save(veiculo);
     }
 
 }
