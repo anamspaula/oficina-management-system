@@ -1,8 +1,8 @@
 package com.oficina.backend.controller;
 
-import com.oficina.backend.domain.entity.Veiculo;
 import com.oficina.backend.dto.CreateUsuarioDTO;
 import com.oficina.backend.dto.UsuarioResponseDTO;
+import com.oficina.backend.dto.VeiculoResponseDTO;
 import com.oficina.backend.service.UsuarioService;
 import com.oficina.backend.service.VeiculoService;
 
@@ -45,7 +45,6 @@ public class UsuarioController {
         return usuarioService.criarUsuario(createUsuarioDTO);
     }
 
-
     /**
      * Endpoint para obter todos os veículos associados a um usuário específico.
      * @param id
@@ -53,9 +52,8 @@ public class UsuarioController {
      */
     @GetMapping("/{id}/veiculos")
     @Operation(summary = "Obter veículos de um usuário específico")
-    public List<Veiculo> getUsuariosVeiculos(@PathVariable Long id) {
+    public List<VeiculoResponseDTO> getUsuariosVeiculos(@PathVariable Long id) {
         return veiculoService.getVeiculosByUsuarioId(id);
     }
     
-
 }
