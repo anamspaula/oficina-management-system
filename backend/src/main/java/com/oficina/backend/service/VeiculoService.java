@@ -104,4 +104,14 @@ public class VeiculoService {
         return veiculoRepository.save(veiculo);
     }
 
+    /**
+     * Método para obter todos os veículos associados a um usuário específico. 
+     * Verifica se o usuário existe e, em caso afirmativo, retorna a lista de veículos associados a esse usuário.
+     * @param usuarioId
+     * @return
+     */
+    public List<Veiculo> getVeiculosByUsuarioId(Long usuarioId) {
+        return veiculoRepository.findByUsuarioId(usuarioId);
+    }
+
 }
