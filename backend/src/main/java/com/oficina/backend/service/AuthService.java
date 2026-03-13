@@ -34,6 +34,8 @@ public class AuthService {
      * @return LoginResponseDTO - objeto contendo o token JWT, nome do usuário e perfil
      */
     public LoginResponseDTO login(LoginRequestDTO dto) {
+
+        System.out.println("Login Chamado");
        
         Usuario usuario = usuarioRepository.findByEmail(dto.getEmail())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
