@@ -1,0 +1,10 @@
+# =================================
+# APPLICATION
+# =================================
+spring.application.name=oficina-management-system
+
+# =================================
+# JWT
+# =================================
+jwt.secret=sua_chave_jwt
+jwt.expiration=86400000
