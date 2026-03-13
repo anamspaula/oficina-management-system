@@ -1,5 +1,7 @@
 package com.oficina.backend.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -26,7 +28,8 @@ public class Veiculo {
     private Integer ano;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "usuario_id", nullable = false)
+    @JsonBackReference
     private Usuario usuario;
 
     public Veiculo() {}

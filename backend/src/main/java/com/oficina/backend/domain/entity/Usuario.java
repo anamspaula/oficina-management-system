@@ -1,5 +1,6 @@
 package com.oficina.backend.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.oficina.backend.domain.enums.PerfilUsuario;
 import jakarta.persistence.*;
 import java.util.List;
@@ -33,6 +34,7 @@ public class Usuario {
     private LocalDateTime dataCriacao;
 
     @OneToMany(mappedBy = "usuario")
+    @JsonManagedReference
     private List<Veiculo> veiculos;
 
     public void setDataCriacao(LocalDateTime now) {
@@ -81,6 +83,10 @@ public class Usuario {
 
     public LocalDateTime getDataCriacao() {
         return dataCriacao;
+    }
+
+    public void setVeiculos(List<Veiculo> veiculos) {
+        this.veiculos = veiculos;
     }
 
 }
