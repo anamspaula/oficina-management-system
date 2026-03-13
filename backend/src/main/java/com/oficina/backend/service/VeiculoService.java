@@ -10,6 +10,7 @@ import com.oficina.backend.domain.repository.UsuarioRepository;
 import com.oficina.backend.domain.repository.VeiculoRepository;
 import com.oficina.backend.dto.CreateVeiculoDTO;
 import com.oficina.backend.dto.UpdateVeiculoDTO;
+import com.oficina.backend.dto.VeiculoResponseDTO;
 
 @Service
 /**
@@ -38,7 +39,7 @@ public class VeiculoService {
      * @return O veículo criado.
      */
     @SuppressWarnings("null")
-    public Veiculo createVeiculo(CreateVeiculoDTO dto) {
+    public VeiculoResponseDTO createVeiculo(CreateVeiculoDTO dto) {
         
         Usuario usuario = usuarioRepository.findById(dto.getUsuarioId())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
@@ -50,8 +51,9 @@ public class VeiculoService {
         veiculo.setAno(dto.getAno());
         veiculo.setUsuario(usuario);
 
-        return veiculoRepository.save(veiculo);
+        veiculoRepository.save(veiculo);
 
+        return toDto(veiculo);
     }
 
     /**
@@ -110,8 +112,28 @@ public class VeiculoService {
      * @param usuarioId
      * @return
      */
-    public List<Veiculo> getVeiculosByUsuarioId(Long usuarioId) {
-        return veiculoRepository.findByUsuarioId(usuarioId);
+    public List<VeiculoResponseDTO> getVeiculosByUsuarioId(Long usuarioId) {
+        return veiculoRepository.findByUsuarioId(usuarioId).stream()
+                .map(this::toDto)
+                .toList();
+    }
+
+
+    /**
+     * Método auxiliar para converter um objeto Veiculo em um VeiculoResponseDTO, 
+     * que é a estrutura de dados que será retornada ao cliente após a criação ou consulta de um veículo. 
+     * @param veiculo
+     * @return
+     */
+    private VeiculoResponseDTO toDto(Veiculo veiculo) {
+        return new VeiculoResponseDTO(
+                veiculo.getId(),
+                veiculo.getAno(),
+                veiculo.getMarca(),
+                veiculo.getModelo(),
+                veiculo.getPlaca(),
+                veiculo.getUsuario().getId()
+        );
     }
 
 }
